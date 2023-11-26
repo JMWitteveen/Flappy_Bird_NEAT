@@ -36,7 +36,7 @@ class Bird:
         if displacement >= 16:
             displacement = 16
         if displacement < 0:
-            d -= 2
+            displacement -= 2
         
         self.y = self.y + displacement
 
