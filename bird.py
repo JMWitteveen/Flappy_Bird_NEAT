@@ -1,4 +1,3 @@
-# bird.py
 import pygame
 import os
 
