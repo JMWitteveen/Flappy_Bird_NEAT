@@ -10,15 +10,14 @@ pygame.font.init()
 
 WIN_WIDTH = 550
 WIN_HEIGHT = 800
+GENERATION = 0
 
 BG_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bg.png")))
 
-STAT_FONT = pygame.font.SysFont("comicsans", 50)
+STAT_FONT = pygame.font.SysFont("comicsans", 28)
 
 
-def draw_window(win, birds, pipes, base, score):
-    text = STAT_FONT.render("Score: " + str(score), 1, (255,255,255))
-    
+def draw_window(win, birds, pipes, base, score, generation):
     win.blit(BG_IMG, (0,0))
     
     for pipe in pipes:
@@ -29,10 +28,21 @@ def draw_window(win, birds, pipes, base, score):
     for bird in birds:
         bird.draw(win)
 
+    text = STAT_FONT.render("Score: " + str(score), 1, (255,255,255))
     win.blit(text, (WIN_WIDTH - 10 - text.get_width(), 10))
+
+    text = STAT_FONT.render("generation: " + str(generation), 1, (255,255,255))
+    win.blit(text, (10,10))
+
+    text = STAT_FONT.render("birds alive: " + str(len(birds)), 1, (255,255,255))
+    win.blit(text, (10,45))
+
     pygame.display.update()
 
 def main(genomes, config):
+    global GENERATION
+    GENERATION += 1
+    
     win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
     
     nets = []
@@ -112,7 +122,7 @@ def main(genomes, config):
                 genome_list.pop(x)
                 
         base.move()
-        draw_window(win, birds, pipes, base, score)   
+        draw_window(win, birds, pipes, base, score, GENERATION)   
 
 def run(config_path):
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,

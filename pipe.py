@@ -5,7 +5,7 @@ PIPE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "pipe
 
 class Pipe():
     GAP_BETWEEN_PIPES = 200
-    X_VELOCITY = 5
+    X_VELOCITY = 8
 
     def __init__(self, x):
         self.x = x

@@ -4,7 +4,7 @@ import os
 BASE_IMG = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "base.png")))
 
 class Base():
-    X_VELOCITY = 5
+    X_VELOCITY = 8
     WIDTH = BASE_IMG.get_width()
     IMG = BASE_IMG
 
