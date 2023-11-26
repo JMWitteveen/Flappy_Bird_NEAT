@@ -64,7 +64,7 @@ def main(genomes, config):
     
     run = True
     while run:
-        clock.tick(30)
+        clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -82,7 +82,7 @@ def main(genomes, config):
             bird.move()
             genome_list[x].fitness += 0.1
             
-            output = nets[x].activate((bird.y, abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].bottom)))
+            output = nets[x].activate((bird.velocity, bird.y, abs(bird.y - pipes[pipe_index].height), abs(bird.y - pipes[pipe_index].bottom), pipes[pipe_index].height, pipes[pipe_index].bottom))
 
             if output[0] >= 0.5:
                 bird.jump()
@@ -109,7 +109,7 @@ def main(genomes, config):
         if add_pipe:
             score += 1
             for genome in genome_list:
-                genome.fitness += 5
+                genome.fitness += 3
             pipes.append(Pipe(WIN_WIDTH))
 
         for pipe in pipes_to_remove:

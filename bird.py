@@ -12,6 +12,7 @@ class Bird:
     MAX_ROTATION = 25
     ROT_VEL = 20
     ANIMATION_TIME = 5
+    TERMINAL_VELOCITY = 20
 
     def __init__(self, x, y):
         self.x = x
@@ -24,7 +25,7 @@ class Bird:
         self.img = self.IMGS[0]
 
     def jump(self):
-        self.velocity = -10.5
+        self.velocity = -11.85
         self.tick_count = 0
         self.height = self.y
 
@@ -33,14 +34,14 @@ class Bird:
 
         displacement = self.velocity * self.tick_count + 1.5 * self.tick_count**2
 
-        if displacement >= 16:
-            displacement = 16
+        if displacement >= self.TERMINAL_VELOCITY:
+            displacement = self.TERMINAL_VELOCITY
         if displacement < 0:
             displacement -= 2
         
         self.y = self.y + displacement
 
-        if displacement < 0 or self.y < self.height + 50:
+        if displacement < 0 or self.y < self.height + 10:
             if self.tilt < self.MAX_ROTATION:
                 self.tilt = self.MAX_ROTATION
         else:
